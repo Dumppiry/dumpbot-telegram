@@ -14,9 +14,14 @@ class Logger:
         handler = RotatingFileHandler(
             filename="dumpbot.log", maxBytes=2000000, backupCount=10
         )
-        formatter = logging.Formatter("%(asctime)s [%(levelname)s]: %(message)s")
+        print_handler = logging.StreamHandler()
+        formatter = logging.Formatter(
+            "%(asctime)s [%(levelname)s]: %(message)s"
+        )
+        print_handler.setFormatter(formatter)
         handler.setFormatter(formatter)
         logger.addHandler(handler)
+        logger.addHandler(print_handler)
         return logger
 
     @staticmethod
